@@ -13,7 +13,8 @@
     background-image: url("../Animation/img/dino.png");
     position: relative;
     background-size:cover;
-    top:30vh;
+    top:400px;
+    bottom: 0px;
 }
 .CACTUS
 {
@@ -22,7 +23,8 @@
     background-image: url("../Animation/img/cactus.png");
     position:relative;
     background-size:cover; /*not getting full image by cover*/
-    top:25vh;
+    top:350px;
     left:75vw;
+    bottom:0px;
 }
-
+        

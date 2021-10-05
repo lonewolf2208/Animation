@@ -2,23 +2,57 @@
 let dino = document.querySelector(".DINO");
 let cactus = document.querySelector(".CACTUS");
 
-var x=0;
+// var x=0;
+// function jump()
+// {
+//     if(x==0)
+//     {
+//         x=1;
+//         dino.style.transform=`transition3d(0,-30px,0)`;
+//     }
+//     else
+//     {
+//         dino.style.transform=`transition3d(0,0,0)`;
+//     }
+//     requestAnimationFrame(jump);
+// }
+
 function jump()
 {
-    if(x==0)
+    let position =0;
+    let timerId = setInterval(function()
     {
-        x++;
-        dino.style.transform = `translate3d(0,-30px,0)`;
-        jump();
-    }
-    else 
-    {    
-        x=0;
-        dino.style.transform=`translate3d(0,0,0)`;
-        return 0;
-    }
+        //move down;
+        if ( position === 200)
+        {
+            clearInterval(timerId);
+            let downTimerId=setInterval(function(){
+                if (position === 380)
+                {
+                  clearInterval(downTimerId); 
+                }
+                position +=20;
+                dino.style.top = position + "px";
+            },20)
+        }
 
+        //move up
+        position+=20;
+        dino.style.top= position - "px"; 
+    },20)
 }
+// var y = 200; 
+// function movingCactus()
+// {
+//     y=y+10;
+//     cactus.style.transform = `transition3d(-${y*0.1},0,0)`;
+//     if(y==500)
+//     {
+//         y=200;
+//     }
+//     requestAnimationFrame(movingCactus);
+// }
+// movingCactus();
 
 document.addEventListener("keydown", function (event) {
     jump();}
