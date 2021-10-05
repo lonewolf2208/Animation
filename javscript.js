@@ -1,79 +1,57 @@
 
-let dino = document.querySelector(".DINO");
-let cactus = document.querySelector(".CACTUS");
+const dino = document.querySelector('.dino');
+const body = document.querySelector('.body');
+let isJumping = false;
+let isGameOver = false;
 
-// var x=0;
-// function jump()
-// {
-//     if(x==0)
-//     {
-//         x=1;
-//         dino.style.transform=`transition3d(0,-30px,0)`;
-//     }
-//     else
-//     {
-//         dino.style.transform=`transition3d(0,0,0)`;
-//     }
-//     requestAnimationFrame(jump);
-// }
-
+let position = 0;
 function jump()
 {
-    let position =0;
-    let timerId = setInterval(function()
-    {
-        //move down;
-        if ( position === 200)
-        {
-            clearInterval(timerId);
-            let downTimerId=setInterval(function(){
-                if (position === 380)
-                {
-                  clearInterval(downTimerId); 
-                }
-                position +=20;
-                dino.style.top = position + "px";
-            },20)
+  let timerId = setInterval(function () {
+    //move down
+    if (position === 150) {
+      clearInterval(timerId);
+      let downTimerId = setInterval(function () {
+        if (position === 0) {
+          clearInterval(downTimerId);
+          isJumping = false;
         }
+        position -=30;
+        dino.style.bottom = position + 'px';
+      },20)
 
-        //move up
-        position+=20;
-        dino.style.top= position - "px"; 
-    },20)
-}
-// var y = 200; 
-// function movingCactus()
-// {
-//     y=y+10;
-//     cactus.style.transform = `transition3d(-${y*0.1},0,0)`;
-//     if(y==500)
-//     {
-//         y=200;
-//     }
-//     requestAnimationFrame(movingCactus);
-// }
-// movingCactus();
-
-function movingCactus()
-{
-    let randomTime = Math.random()*4000;
-    let obstacleposition=750;
-    cactus.style.left = obstacleposition + 'px';
-    let timerId = setInterval(function()
-    {
-        if(obstacleposition > 0 && position < 390 && obstacleposition<60)
-        {
-            clearInterval(timerId);
-            alert("Game Over");
-        }
-    
-    obstacleposition -=10;
-    cactus.style.left = obstacleposition + 'px';
-    },20)
-    setTimeout(movingCactus,randomTIme);
+    }
+    //move up
+    position +=30;
+    dino.style.bottom = position + 'px';
+  },20)
 }
 
+function generateObstacles() {
+  let randomTime = Math.random() * 4000;
+  let obstaclePosition = 1000;
+  const obstacle = document.createElement('div');
+  if (!isGameOver) obstacle.classList.add('obstacle');
+  grid.appendChild(obstacle);
+  obstacle.style.left = obstaclePosition + 'px';
+  let timerId = setInterval(function() {
+    if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60) {
+      clearInterval(timerId)
+      alert('Game over');
+      isGameOver = true
+      //removing all  games children
+      while (grid.firstChild) {
+        grid.removeChild(grid.lastChild)
+      }
+      
+    }
+    obstaclePosition -=10
+    obstacle.style.left = obstaclePosition + 'px'
+  },20)
+  if (!isGameOver) setTimeout(generateObstacles, randomTime)
+}
+generateObstacles()
+document.addEventListener('keyup', function(event){
 
-document.addEventListener("keydown", function (event) {
-    jump();}
-);
+    jump();
+})
