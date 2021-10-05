@@ -54,6 +54,26 @@ function jump()
 // }
 // movingCactus();
 
+function movingCactus()
+{
+    let randomTime = Math.random()*4000;
+    let obstacleposition=750;
+    cactus.style.left = obstacleposition + 'px';
+    let timerId = setInterval(function()
+    {
+        if(obstacleposition > 0 && position < 390 && obstacleposition<60)
+        {
+            clearInterval(timerId);
+            alert("Game Over");
+        }
+    
+    obstacleposition -=10;
+    cactus.style.left = obstacleposition + 'px';
+    },20)
+    setTimeout(movingCactus,randomTIme);
+}
+
+
 document.addEventListener("keydown", function (event) {
     jump();}
 );
