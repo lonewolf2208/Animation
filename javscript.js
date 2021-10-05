@@ -1,12 +1,25 @@
-const elem = document.querySelector(".container")
-var x = 100;
-function backgroundFunction()
+
+let dino = document.querySelector(".DINO");
+let cactus = document.querySelector(".CACTUS");
+
+var x=0;
+function jump()
 {
-    while(x!=500)
+    if(x==0)
     {
-    x+=1;
-    elem.style.transform = `translate3d(${0.1*x}vw,0,0)`;
-    requestAnimationFrame(backgroundFunction);
+        x++;
+        dino.style.transform = `translate3d(0,-30px,0)`;
+        jump();
     }
+    else 
+    {    
+        x=0;
+        dino.style.transform=`translate3d(0,0,0)`;
+        return 0;
+    }
+
 }
-backgroundFunction();
+
+document.addEventListener("keydown", function (event) {
+    jump();}
+);
