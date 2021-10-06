@@ -1,3 +1,10 @@
+
+html
+{
+    background-image: url("../Animation/img/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 .dino {
   position: absolute;
   width: 60px;

@@ -2,17 +2,18 @@
 const dino = document.querySelector('.dino');
 const body = document.querySelector('.body');
 let isJumping = false;
+let gravity = 0.9
 let isGameOver = false;
 
-let position = 0;
-function jump()
-{
+
+let position = 0
+function jump() {
   let timerId = setInterval(function () {
     //move down
     if (position === 150) {
       clearInterval(timerId);
       let downTimerId = setInterval(function () {
-        if (position === 0) {
+        if (position === 30) {
           clearInterval(downTimerId);
           isJumping = false;
         }
@@ -22,8 +23,8 @@ function jump()
 
     }
     //move up
-    position +=30;
-    dino.style.bottom = position + 'px';
+    position +=30
+    dino.style.bottom = position + 'px'
   },20)
 }
 
@@ -32,16 +33,17 @@ function generateObstacles() {
   let obstaclePosition = 1000;
   const obstacle = document.createElement('div');
   if (!isGameOver) obstacle.classList.add('obstacle');
-  grid.appendChild(obstacle);
+  body.appendChild(obstacle);
   obstacle.style.left = obstaclePosition + 'px';
+
   let timerId = setInterval(function() {
     if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60) {
       clearInterval(timerId)
       alert('Game over');
       isGameOver = true
       //removing all  games children
-      while (grid.firstChild) {
-        grid.removeChild(grid.lastChild)
+      while (body.firstChild) {
+        body.removeChild(body.lastChild);
       }
       
     }
